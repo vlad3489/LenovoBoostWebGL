@@ -68,7 +68,7 @@
 			position: absolute;
 			background: #222;
 			box-shadow: 1px 1px 5px #000;
-			background-image: url("Template/WarehouseBackground.jpg");
+			background-image: url("Template/LenovoBG.jpg");
 			background-size: auto;
 			-webkit-background-size: cover;
 			-moz-background-size: cover;
@@ -83,7 +83,7 @@
 			margin-left: -150px;
 			left: 50%;
 			height: 18px;
-			background-color: #882121;
+			background-color: #218822;
 			box-shadow: 1px 1px 5px #111;
 		}
 
@@ -94,7 +94,7 @@
 			margin-left: -150px;
 			width: 0px;
 			height: 18px;
-			background-color: #dc4241;
+			background-color: #65dc41;
 		}
 
 		p#loadingInfo {
@@ -119,7 +119,7 @@
 			width: 300px;
 			position: relative;
 			overflow: hidden;
-			background-color: #882121;
+			background-color: #4CAF50;
 			box-shadow: 1px 1px 5px #111;
 		}
 
@@ -130,7 +130,7 @@
 			width: 150%;
 			margin-left: -10px;
 			height: 10px;
-			background-color: #e85352;
+			background-color: #52e884;
 			transform: rotate(-5deg);
 			animation: loading 1s linear infinite;
 		}
@@ -154,7 +154,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-	
+
 
 	<script src="Build/UnityLoader.js"></script>
 	<script>
@@ -201,7 +201,8 @@
 		Open Popup
 	</a> -->
 
-	<a id="video" style="display: none;" data-fancybox href="https://vimeo.com/191947042?color=f00"> Vimeo video - custom color </a>
+	<a id="video" style="display: none;" data-fancybox href="https://vimeo.com/191947042?color=f00"> Vimeo video -
+		custom color </a>
 
 	<div id="webgl-content" style="width:100%; height: 100%">
 		<div id="gameContainer" style="width: 100%; height: 100%"></div>
@@ -217,9 +218,20 @@
 
 
 	<script>
-		// $(document).ready(function () {
-		// 	$("#video").videoPopup();
-		// });
+		$(document).ready(function () {
+			// $("#video").videoPopup();
+
+			$('[data-fancybox]').fancybox({
+				youtube: {
+					controls: 1,
+					showinfo: 0
+				},
+				vimeo: {
+					color: 'f00'
+				}
+			});
+
+		});
 
 		// $(function () {
 		// 	$("#video").videoPopup();

@@ -7,16 +7,18 @@
 	<title>Unity WebGL Player | Lenovo Boost WebGL</title>
 
 	<link rel="stylesheet" href="src/video.popup.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 	<style>
-		* {
+		/* * {
 			margin: 0;
 			padding: 0;
 		}
 
 		body {
 			overflow: hidden;
-		}
+		} */
 
 		#gameContainer canvas {
 			display: block;
@@ -144,6 +146,80 @@
 				top: 225%
 			}
 		}
+
+
+
+		body,
+		html {
+			font-size: 0.9em;
+			height: 100%;
+			background-image: url("./Template/ChalkboardBackground.jpg");
+			height: 100%;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+
+		}
+
+		.bg {
+			height: 100%;
+		}
+
+		.logo {
+			width: 24vw;
+		}
+
+		label {
+			font-weight: bold;
+		}
+
+		.my-but {
+			font-size: 1.4rem;
+		}
+
+		@media all and (max-width: 1200px) {
+
+			/* screen size until 1200px */
+			body {
+				font-size: 1.5em;
+				/* 1.5x default size */
+			}
+		}
+
+		@media all and (max-width: 1000px) {
+
+			/* screen size until 1000px */
+			body {
+				font-size: 1.2em;
+				/* 1.2x default size */
+			}
+		}
+
+		@media all and (max-width: 500px) {
+
+			/* screen size until 500px */
+			body {
+				font-size: 0.8em;
+				/* 0.8x default size */
+			}
+
+			h2 {
+				font-size: 1.2rem;
+				margin-bottom: 20px !important;
+			}
+
+			h6 {
+				font-size: .8rem;
+			}
+
+			.my-but {
+				font-size: 1rem;
+			}
+
+			small {
+				font-size: 90%;
+			}
+		}
 	</style>
 
 	<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -160,7 +236,7 @@
 	<script>
 		function UnityProgress(gameInstance, progress) {
 			var container = document.getElementById("gameContainer");
-			if (container) document.body.style.background = container.style.background;
+			// if (container) document.body.style.background = container.style.background;
 
 			if (!gameInstance.Module) {
 				return;
@@ -217,6 +293,34 @@
 	<p id="loadingInfo"></p>
 
 
+
+	<div class="check-in-form">
+		<div class="bg text-center text-white">
+			<div class="container">
+				<img src="./Template/LenovoLogo.jpg" alt="logo" class="logo my-5">
+				<h2 class="heading mb-2">Welcome to the Lenovo VR Experience</h2>
+				<h6>Enter your contact information below to continue to explore the world of Lenovo Educause.</h6>
+				<form id="confirmForm" class="mt-5">
+					<input type="hidden" name="csrfmiddlewaretoken"
+						value="zxGq4VQEMY0SZ9PNnZa3ZUIM6savtQQsxSbS9Xyow8c3dShaUjoOSjiOaWRyNPeo">
+					<label for="name" class="float-left my-2">NAME</label>
+					<input type="text" required="" class="form-control" id="name" name="name">
+					<label for="email" class="float-left mt-4 mb-2">EMAIL</label>
+					<input type="text" required="" class="form-control mb-3" id="email" name="email">
+					<label for="agree" class="my-2"> <input type="checkbox" required="" class="mx-2" name="agree"
+							id="agree"> <small> I agree to recieve product solution, and event information and
+							promotional offers by email from Lenovo, and i confirm
+							that I am 16 years of age or older. You may unsubscribe at any time using links included in
+							each message.
+						</small> </label>
+					<button id="checkInConfirmBtn" class="btn btn-success mt-5 my-but" type="submit"
+						style="background-color: #69BD4B; font-weight: bold">ENTER LENOVO VR EXPERIENCE</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
 	<script>
 		$(document).ready(function () {
 			// $("#video").videoPopup();
@@ -231,7 +335,23 @@
 				}
 			});
 
+			const checkInForm = document.getElementById('confirmForm');
+			// checkInForm.submit(function (e) {
+			// 	e.preventDefault();
+			// });
+
+			checkInForm.addEventListener('submit', onSuccessSubmit);
+			// checkInConfirmBtn.addEventListener('click', function () {
+			// 	$('#webgl-content').css("display", "");
+			// });
 		});
+
+		function onSuccessSubmit(event) {
+			event.preventDefault();
+			$('#webgl-content').css("display", "");
+			gameInstance.SendMessage('[States Manager]', 'SwitchToFpsView');
+		}
+
 
 		// $(function () {
 		// 	$("#video").videoPopup();

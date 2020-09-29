@@ -20,6 +20,18 @@
 			overflow: hidden;
 		} */
 
+		/* Safari fix */
+		input {
+			/* Chrome, Opera, Safari */
+			-webkit-user-select: text;
+			/* Firefox 2+ */
+			-moz-user-select: text;
+			/* IE 10+ */
+			-ms-user-select: text;
+			/* Standard syntax */
+			user-select: text;
+		}
+
 		#gameContainer canvas {
 			display: block;
 		}
@@ -322,6 +334,12 @@
 
 
 	<script>
+		
+		const checkInForm = document.getElementById('confirmForm');
+		const checkInFormContainer = $('.check-in-form');
+		const checkInNameField = $('#name');
+		const checkInEmailField = $('#email');
+
 		$(document).ready(function () {
 			// $("#video").videoPopup();
 
@@ -335,7 +353,7 @@
 				}
 			});
 
-			const checkInForm = document.getElementById('confirmForm');
+			// const checkInForm = document.getElementById('confirmForm');
 			// checkInForm.submit(function (e) {
 			// 	e.preventDefault();
 			// });
@@ -349,7 +367,14 @@
 		function onSuccessSubmit(event) {
 			event.preventDefault();
 			$('#webgl-content').css("display", "");
-			gameInstance.SendMessage('[States Manager]', 'SwitchToFpsView');
+
+			// Send entered name and email to the Unity
+			let enteredName = checkInNameField.val();
+			let enteredEmail = checkInEmailField.val();
+			gameInstance.SendMessage('[SceneEntrypoint]', 'OnUserNameEntered', enteredName);
+			gameInstance.SendMessage('[SceneEntrypoint]', 'OnUserEmailEntered', enteredEmail);
+			gameInstance.SendMessage('[SceneEntrypoint]', 'OnCheckInFormClosed');
+			checkInFormContainer.css("display", "none");
 		}
 
 

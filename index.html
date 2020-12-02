@@ -10,6 +10,16 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+	<!-- Smart look -->
+	<script type='text/javascript'>
+		window.smartlook || (function (d) {
+			var o = smartlook = function () { o.api.push(arguments) }, h = d.getElementsByTagName('head')[0];
+			var c = d.createElement('script'); o.api = new Array(); c.async = true; c.type = 'text/javascript';
+			c.charset = 'utf-8'; c.src = 'https://rec.smartlook.com/recorder.js'; h.appendChild(c);
+		})(document);
+		smartlook('init', 'cc7674f09ce41da9ad5f297b646c57ae927097c0');
+	</script>
+
 	<style>
 		/* * {
 			margin: 0;
@@ -165,7 +175,7 @@
 		html {
 			font-size: 0.9em;
 			height: 100%;
-			background-image: url("./Template/ChalkboardBackground.jpg");
+			/* background-image: url("./Template/ChalkboardBackground.jpg"); */
 			height: 100%;
 			background-position: center;
 			background-repeat: no-repeat;
@@ -306,7 +316,7 @@
 
 
 
-	<div class="check-in-form">
+	<div class="check-in-form" style="display: none;">
 		<div class="bg text-center text-white">
 			<div class="container">
 				<img src="./Template/LenovoLogo.jpg" alt="logo" class="logo my-5">
@@ -334,7 +344,7 @@
 
 
 	<script>
-		
+
 		const checkInForm = document.getElementById('confirmForm');
 		const checkInFormContainer = $('.check-in-form');
 		const checkInNameField = $('#name');
@@ -381,6 +391,25 @@
 		// $(function () {
 		// 	$("#video").videoPopup();
 		// });
+
+		// Init UUID and Smartlook User ID
+		(function () {
+			const uuidEmit = () => {
+				// Get now time
+				const n = Date.now();
+				// Generate random
+				const r = Math.random();
+				// Stringify now time and generate additional random number
+				const s = String(n) + String(~~(r * 9e4) + 1e4);
+				// Form UUID and return it
+				return `${s.slice(0, 8)}-${s.slice(8, 12)}-4${s.slice(12, 15)}-${[8, 9, 'a', 'b'][~~(r * 3)]}${s.slice(15, 18)}-${s.slice(s.length - 12)}`;
+			};
+
+			console.log(`Init id: ${uuidEmit()}`);
+			smartlook('identify', uuidEmit());
+
+		}());
+
 	</script>
 
 </body>
